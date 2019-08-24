@@ -12,7 +12,7 @@ module.exports = {
      * @throws NoSuchRouteError
      */
     async getById(routeId) {
-        const route = await db.models.Route.findByPk(routeId);
+        const route = await db().models.Route.findByPk(routeId);
 
         if (!route) {
             throw new NoSuchRouteError(
@@ -61,7 +61,7 @@ async function findDataFromApi(routeId) {
 async function createRouteToDb(routeId, routeData) {
     const { mode, shortName: name } = routeData;
 
-    const [route] = await db.models.Route.findOrCreate({
+    const [route] = await db().models.Route.findOrCreate({
         where: {
             id: routeId,
             mode,
